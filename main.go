@@ -9,16 +9,19 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const addr = "0.0.0.0:8537"
+
 func main() {
 	r := mux.NewRouter()
 	router.Register(r)
 
 	srv := &http.Server{
 		Handler:      r,
-		Addr:         "127.0.0.1:8000",
+		Addr:         addr,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
 
+	log.Printf("listening on %s\n", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
 }
